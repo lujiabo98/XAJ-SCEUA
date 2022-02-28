@@ -1,10 +1,18 @@
 # XAJ-SCEUA
 实现SCE-UA算法率定新安江模型
 
-
 # 目的
 
 用自己编写的SCE-UA算法自动率定自己编写的三水源新安江模型，检验SCE-UA算法实用性。本地路径`E:\Research\Practice\XAJ+SCEUA\XAJ+SCEUA`
+
+# 如何使用
+
+1. 下载所有文件`https://github.com/lujiabo98/XAJ-SCEUA/tree/master`
+2. 用 VS 2019打开`XAJ+SCEUA.sln`
+3. 解决方案下右键选择属性，所有配置，所有平台下，将C++语言标准设为 ISO C++20 标准
+4. `Release`和`x64`下，重新生成解决方案
+5. 将`E:\Research\Practice\XAJ+SCEUA\XAJ+SCEUA\SCEUA\IOexamples`下的`scein.txt`和`E:\Research\Practice\XAJ+SCEUA\XAJ+SCEUA\XAJ\IOexamples`下的非示例文件粘贴到`E:\Research\Practice\XAJ+SCEUA\XAJ+SCEUA\x64\Release`路径下
+6. 点击 本地Windows调试器 ，即可运行SCE-UA自动优化程序
 
 # 技术路线
 
@@ -30,5 +38,4 @@
 
 ## 后处理
 
-`PostProcessing()`函数调用`ReadValues()`从待率定模型（在这里指新安江模型）输出结果中读取数据（出口断面流量数据`Q.txt`）；
-调用`CalculateNSE()`计算纳什效率系数`NSE`；因为SCE-UA算法为最小化算法，因此返回`1-NSE`，这样当`1-NSE`越小时，`NSE`越接近1。
+`PostProcessing()`函数调用`ReadValues()`从待率定模型（在这里指新安江模型）输出结果中读取数据（出口断面流量数据`Q.txt`）；调用`CalculateNSE()`计算纳什效率系数`NSE`；因为SCE-UA算法为最小化算法，因此返回`1-NSE`，这样当`1-NSE`越小时，`NSE`越接近1。
