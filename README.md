@@ -17,7 +17,7 @@
 2. 用 VS 2019打开`XAJ+SCEUA.sln`
 3. 解决方案下右键选择属性，所有配置，所有平台下，将C++语言标准设为 ISO C++20 标准
 4. `Release`和`x64`下，重新生成解决方案
-5. 将`E:\Research\Practice\XAJ+SCEUA\XAJ+SCEUA\SCEUA\IOexamples`下的`scein.txt`和`E:\Research\Practice\XAJ+SCEUA\XAJ+SCEUA\XAJ\IOexamples`下的非示例文件粘贴到`E:\Research\Practice\XAJ+SCEUA\XAJ+SCEUA\x64\Release`路径下
+5. 将`E:\Research\Practice\XAJ+SCEUA\XAJ+SCEUA\SCEUA\IOexamples`下的`scein.txt`和`E:\Research\Practice\XAJ+SCEUA\XAJ+SCEUA\XAJ\IOexamples`下的**非示例文件**粘贴到`E:\Research\Practice\XAJ+SCEUA\XAJ+SCEUA\x64\Release`路径下
 6. 点击 本地Windows调试器 ，即可运行SCE-UA自动优化程序
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/aa35655bbef241cb9370a5f142fed68e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6LWW5Lqm5peg,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
 
@@ -46,3 +46,11 @@
 ## 后处理
 
 `PostProcessing()`函数调用`ReadValues()`从待率定模型（在这里指新安江模型）输出结果中读取数据（出口断面流量数据`Q.txt`）；调用`CalculateNSE()`计算纳什效率系数`NSE`；因为SCE-UA算法为最小化算法，因此返回`1-NSE`，这样当`1-NSE`越小时，`NSE`越接近1。
+
+# 与Dakota算法对比
+
+- 从效率上讲，Dakota高于SCE-UA，同样是率定新安江模型的7个敏感参数，Dakota共调用模型136次，而SCE-UA则调用模型1240次，是Dakota的9.1倍。
+- 从质量上讲，SCE-UA高于Dakota，同样是率定新安江模型的7个敏感参数，SCE-UA的纳什效率系数为0.882869，Dakota的纳什效率系数为0.8677575，SCE-UA比Dakota高0.015，1.74%。
+- 从时间上讲，Dakota耗时81.068 s，SCE-UA耗时80.252 s，大致相同。
+
+总的来讲，SCE-UA算法收敛效率明显低于Dakota，率定质量与Dakota大致相当，优先选择Dakota进行模型的参数率定。
